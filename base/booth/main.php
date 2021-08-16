@@ -1,5 +1,5 @@
 <?php
-include 'shortcodes.php';
+//include 'shortcodes.php';
 include 'read.php';
 include 'create.php';
 include 'delete.php';

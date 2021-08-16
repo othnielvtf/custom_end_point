@@ -249,6 +249,37 @@ function activate_custom_point_end()
     {
         $result = $wpdb->insert("my_settings", $data);
     }
+    
+    $event_quizzes_sql_create = "CREATE TABLE event_quizzes (
+        id int(11) NOT NULL AUTO_INCREMENT,
+        question text NOT NULL,
+        correct_answer_id int(11) NOT NULL,
+        tries int(11) NOT NULL,
+        time_stamp timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        PRIMARY KEY (id)
+        ) ENGINE = InnoDB;";
+    
+    maybe_create_table("event_quizzes", $event_quizzes_sql_create);
+    
+    $quiz_answers_sql_create = "CREATE TABLE quiz_answers (
+        id int(11) NOT NULL AUTO_INCREMENT,
+        answer_text text NOT NULL,
+        time_stamp timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        PRIMARY KEY (id)
+        ) ENGINE = InnoDB;";
+    
+    maybe_create_table("quiz_answers", $quiz_answers_sql_create);
+    
+    $player_answers_sql_create = "CREATE TABLE player_answers (
+        id int(11) NOT NULL AUTO_INCREMENT,
+        quiz_id int(11) NOT NULL,
+        answer_id int(11) NOT NULL,
+        user_id int(11) NOT NULL,
+        time_stamp timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        PRIMARY KEY (id)
+        ) ENGINE = InnoDB;";
+    
+    maybe_create_table("player_answers", $player_answers_sql_create);
 }
 
 /**
